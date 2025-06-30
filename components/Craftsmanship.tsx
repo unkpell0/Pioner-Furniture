@@ -10,7 +10,7 @@ const CraftsmanshipPoint: React.FC<{ icon: React.ReactNode; title: string; descr
     >
         <div className="flex items-center mb-1.5">
             {icon}
-            <h4 className="ml-2.5 text-md font-semibold text-brand-brown">{title}</h4>
+            <h4 className="ml-2.5 text-base font-semibold text-brand-brown">{title}</h4>
         </div>
         <p className="text-sm text-brand-text leading-snug">{description}</p>
     </div>
@@ -19,6 +19,7 @@ const CraftsmanshipPoint: React.FC<{ icon: React.ReactNode; title: string; descr
 
 const Craftsmanship: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
+  const altText = "Close-up of a craftsman's hands carving wood";
 
   useEffect(() => {
     const timer = setTimeout(() => setIsMounted(true), 50); 
@@ -26,7 +27,7 @@ const Craftsmanship: React.FC = () => {
   }, []);
 
   return (
-    <section id="craftsmanship" className="py-12 md:py-16 bg-green-50 overflow-hidden">
+    <section id="craftsmanship" className="py-16 sm:py-20 md:py-24 bg-green-50 overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           <div className="lg:w-1/2">
@@ -66,12 +67,14 @@ const Craftsmanship: React.FC = () => {
               "Detail kecil dari kayu, menciptakan kenyamanan yang besar."
             </p>
           </div>
-          <div className="lg:w-1/2">
-            <img
-              src="https://ai.ceo.microsoft.com/content/images/2024/07/26/3941459d-5a8b-4b24-9b88-10a5180f2d79.jpg"
-              alt="Detail Ukiran Kayu Tradisional Jepara yang Intricate"
-              className={`rounded-xl shadow-xl w-full h-auto object-cover transition-all duration-200 ease-out transform ${isMounted ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
-            />
+          <div className="lg:w-1/2 w-full">
+            <div
+              role="img"
+              aria-label={altText}
+              className={`flex items-center justify-center bg-gray-300 text-gray-600 rounded-xl shadow-xl w-full p-4 text-center aspect-[4/3] transition-all duration-200 ease-out transform ${isMounted ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
+            >
+                {altText}
+            </div>
           </div>
         </div>
       </div>

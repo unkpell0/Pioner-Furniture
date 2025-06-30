@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { WoodIcon } from './icons/WoodIcon';
 
@@ -33,7 +32,7 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 py-3">
         <div className="flex justify-between items-center">
-          <a href="#home" className="flex items-center text-white text-xl md:text-2xl font-semibold hover:text-brand-amber transition-colors duration-200">
+          <a href="#home" className="flex items-center text-white text-lg sm:text-xl md:text-2xl font-semibold hover:text-brand-amber transition-colors duration-200">
             <WoodIcon className="h-7 w-7 md:h-8 md:w-8 mr-2 text-brand-amber" />
             PionerFurniture
           </a>

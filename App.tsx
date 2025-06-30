@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -15,13 +14,13 @@ const App: React.FC = () => {
       <Navbar />
       <main className="flex-grow">
         <Hero />
-        <div id="benefits" className="relative pt-10 md:pt-12 bg-white overflow-hidden"> {/* Added overflow-hidden for safety with leaf transforms */}
+        <div id="benefits" className="relative overflow-hidden"> {/* Removed padding and background */}
           <LeafDecorationTopLeft className="hidden md:block w-28 h-28 opacity-15" />
           <Benefits />
           <LeafDecorationBottomRight className="hidden md:block w-28 h-28 opacity-15" />
         </div>
         <Craftsmanship /> {/* Craftsmanship already has overflow-hidden on its section */}
-        <div id="heritage" className="relative pt-10 md:pt-12 bg-white overflow-hidden">  {/* Added overflow-hidden */}
+        <div id="heritage" className="relative overflow-hidden">  {/* Removed padding and background */}
             <LeafDecorationTopLeft className="hidden md:block w-32 h-32 opacity-10 transform -translate-x-8 -translate-y-8" />
             <Heritage /> {/* Heritage already has overflow-hidden on its section */}
             <LeafDecorationBottomRight className="hidden md:block w-32 h-32 opacity-10 transform translate-x-8 translate-y-8" />

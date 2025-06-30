@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { SparkleIcon } from './icons/SparkleIcon';
 import { LeafIcon } from './icons/LeafIcon';
@@ -31,7 +30,7 @@ const Benefits: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-12 md:py-16 bg-brand-cream">
+    <section className="py-16 sm:py-20 md:py-24 bg-brand-cream">
       <div className="container mx-auto px-6">
         <h2 
           className={`text-2xl md:text-3xl font-bold text-center text-brand-brown-dark mb-10 transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
