@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PionerFurniture - Keindahan Furnitur Kayu Jepara</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-brown': '#5D4037', // Main brown
+              'brand-brown-light': '#A1887F', // Lighter brown for accents or text
+              'brand-brown-dark': '#3E2723', // Darker brown for text or backgrounds
+              'brand-cream': '#FBF7F0', // Main background
+              'brand-green': '#689F38', // Accent green
+              'brand-green-light': '#AED581', // Lighter green
+              'brand-text': '#4E342E', // Primary text color on light backgrounds
+              'brand-amber': '#FFC107', // Accent amber
+              'brand-amber-dark': '#FFA000', // Darker amber for hovers
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'], // Primary font
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-brand-cream text-brand-text font-sans">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
