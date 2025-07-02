@@ -32,12 +32,12 @@ const Craftsmanship: React.FC = () => {
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           <div className="lg:w-1/2">
             <h2 
-              className={`text-2xl md:text-3xl font-bold text-brand-brown-dark mb-4 leading-tight transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+              className={`text-3xl md:text-4xl font-bold text-brand-brown-dark mb-5 leading-tight transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
             >
               Seni Ukir Kayu Tradisional Jepara
             </h2>
             <p 
-              className={`text-base text-brand-text mb-6 leading-relaxed transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+              className={`text-base md:text-lg text-brand-text mb-8 leading-relaxed transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
             >
               Setiap ukiran adalah maha karya yang lahir dari tangan-tangan terampil pengrajin Jepara, membawa detail dan keindahan yang tak lekang oleh waktu.
             </p>

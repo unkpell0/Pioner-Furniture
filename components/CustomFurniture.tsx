@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect } from 'react';
 import { PencilSquareIcon } from './icons/PencilSquareIcon';
 import { CheckBadgeIcon } from './icons/CheckBadgeIcon';
@@ -21,7 +22,7 @@ const FeatureItem: React.FC<FeatureItemProps> = ({ icon, title, description, isV
     <div className="flex-shrink-0 text-brand-amber mt-1 transition-transform duration-200 group-hover:scale-110">{icon}</div>
     <div className="ml-3.5">
       <h4 className="text-base font-semibold text-brand-brown">{title}</h4>
-      <p className="text-brand-text text-sm leading-snug">{description}</p>
+      <p className="text-brand-text text-sm md:text-base leading-snug">{description}</p>
     </div>
   </div>
 );
@@ -50,14 +51,14 @@ const CustomFurniture: React.FC = () => {
   return (
     <section id="custom" className="py-16 sm:py-20 md:py-24 bg-green-50 overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-10">
+        <div className="text-center mb-12">
           <h2 
-            className={`text-2xl md:text-3xl font-bold text-brand-brown-dark mb-3 transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+            className={`text-3xl md:text-4xl font-bold text-brand-brown-dark mb-4 transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
           >
             Wujudkan Furnitur Impian Anda!
           </h2>
           <p 
-            className={`text-base text-brand-text max-w-2xl mx-auto leading-relaxed transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+            className={`text-base md:text-lg text-brand-text max-w-2xl mx-auto leading-relaxed transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
           >
             Custom Furniture Eksklusif dari Jepara. Desain yang Anda bayangkan, kami wujudkan dalam kualitas terbaik.
           </p>
@@ -114,7 +115,7 @@ const CustomFurniture: React.FC = () => {
             >
               <a
                 href="mailto:info@pionerfurniture.com?subject=Inquiry%20Custom%20Furniture"
-                className="bg-brand-brown hover:bg-brand-brown-dark text-white font-semibold py-2.5 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 text-base md:text-lg"
+                className="bg-brand-brown hover:bg-brand-brown-dark text-white font-semibold py-3 px-6 md:py-3 md:px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 text-base md:text-lg"
               >
                 Hubungi Kami Untuk Info Lebih Lanjut!
               </a>
