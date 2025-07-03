@@ -102,7 +102,7 @@ const CustomFurniture: React.FC = () => {
             >
               <a
                 href="mailto:info@pionerfurniture.com?subject=Inquiry%20Custom%20Furniture"
-                className="bg-brand-brown hover:bg-brand-brown-dark text-white font-semibold py-3 px-6 md:py-3 md:px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 text-base md:text-lg"
+                className="inline-block bg-brand-brown hover:bg-brand-brown-dark text-white font-semibold py-3 px-6 md:px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 text-sm sm:text-base"
               >
                 Hubungi Kami Untuk Info Lebih Lanjut!
               </a>

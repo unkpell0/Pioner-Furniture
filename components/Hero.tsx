@@ -47,7 +47,10 @@ const Hero: React.FC = () => {
     if ((e.target as HTMLElement).closest('a, button')) {
       return;
     }
-    e.preventDefault();
+    // Don't prevent default for mouse events to allow clicking links/buttons
+    if ('touches' in e) {
+        e.preventDefault();
+    }
 
     if (slides.length <= 1) return;
     setIsDragging(true);
@@ -82,7 +85,7 @@ const Hero: React.FC = () => {
 
   return (
     <section 
-      className={`relative h-[60vh] sm:h-[70vh] md:h-[85vh] text-white overflow-hidden select-none cursor-grab ${isDragging ? 'cursor-grabbing' : 'active:cursor-grabbing'}`}
+      className={`relative h-screen lg:h-[85vh] text-white overflow-hidden select-none cursor-grab ${isDragging ? 'cursor-grabbing' : 'active:cursor-grabbing'}`}
       aria-label="Hero section with a slideshow of Jepara wood carvings"
       onTouchStart={handleDragStart}
       onTouchMove={handleDragMove}
@@ -106,7 +109,7 @@ const Hero: React.FC = () => {
       ))}
 
       {/* Content */}
-      <div className="container mx-auto px-6 h-full flex flex-col justify-center items-center text-center relative z-10 pointer-events-none">
+      <div className="container mx-auto px-6 h-full flex flex-col justify-center items-center text-center relative z-10">
         <h1 
           className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight transition-all duration-700 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
         >
@@ -119,7 +122,7 @@ const Hero: React.FC = () => {
         </p>
         <a
           href="#custom"
-          className={`bg-brand-amber hover:bg-brand-amber-dark text-brand-brown-dark font-semibold py-2.5 px-6 md:py-3 md:px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-700 transform hover:scale-105 text-base md:text-lg delay-300 pointer-events-auto ${isMounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+          className={`inline-block bg-brand-amber hover:bg-brand-amber-dark text-brand-brown-dark font-semibold py-2.5 px-6 md:py-3 md:px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-700 transform hover:scale-105 text-base md:text-lg delay-300 pointer-events-auto ${isMounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
         >
           Lihat Koleksi Kustom
         </a>
