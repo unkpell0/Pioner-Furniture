@@ -22,7 +22,6 @@ const Hero: React.FC = () => {
   const [dragEnd, setDragEnd] = useState<number | null>(null);
   const [isDragging, setIsDragging] = useState(false);
 
-  // Minimum swipe distance
   const minSwipeDistance = 50;
 
   const nextSlide = useCallback(() => {
@@ -33,44 +32,46 @@ const Hero: React.FC = () => {
     setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
   }, []);
 
-  // Effect for mounting animations
   useEffect(() => {
     const mountTimer = setTimeout(() => setIsMounted(true), 50); 
     return () => clearTimeout(mountTimer);
   }, []);
 
-  // Effect for auto-play slideshow, resets on manual navigation
   useEffect(() => {
     if (slides.length <= 1) return;
-    const slideTimer = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    const slideTimer = setInterval(nextSlide, 5000);
     return () => clearInterval(slideTimer);
-  }, [activeSlide, slides.length, nextSlide]);
+  }, [activeSlide, nextSlide]);
 
-  const handleDragStart = (clientX: number) => {
+  const handleDragStart = (e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>) => {
+    if ((e.target as HTMLElement).closest('a, button')) {
+      return;
+    }
+    e.preventDefault();
+
     if (slides.length <= 1) return;
     setIsDragging(true);
-    setDragEnd(null); // Reset drag end on new drag
+    setDragEnd(null);
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     setDragStart(clientX);
   };
 
-  const handleDragMove = (clientX: number) => {
+  const handleDragMove = (e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>) => {
     if (!isDragging) return;
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
     setDragEnd(clientX);
   };
 
   const handleDragEnd = () => {
-    if (!isDragging) return; // Prevent firing if not dragging
+    if (!isDragging) return;
 
     setIsDragging(false);
 
     if (dragStart !== null && dragEnd !== null) {
       const distance = dragStart - dragEnd;
-      const isLeftSwipe = distance > minSwipeDistance;
-      const isRightSwipe = distance < -minSwipeDistance;
-
-      if (isLeftSwipe) {
+      if (distance > minSwipeDistance) {
         nextSlide();
-      } else if (isRightSwipe) {
+      } else if (distance < -minSwipeDistance) {
         prevSlide();
       }
     }
@@ -83,13 +84,11 @@ const Hero: React.FC = () => {
     <section 
       className={`relative h-[60vh] sm:h-[70vh] md:h-[85vh] text-white overflow-hidden select-none cursor-grab ${isDragging ? 'cursor-grabbing' : 'active:cursor-grabbing'}`}
       aria-label="Hero section with a slideshow of Jepara wood carvings"
-      // Touch events
-      onTouchStart={(e) => handleDragStart(e.targetTouches[0].clientX)}
-      onTouchMove={(e) => handleDragMove(e.targetTouches[0].clientX)}
+      onTouchStart={handleDragStart}
+      onTouchMove={handleDragMove}
       onTouchEnd={handleDragEnd}
-      // Mouse events for desktop dragging
-      onMouseDown={(e) => { e.preventDefault(); handleDragStart(e.clientX); }}
-      onMouseMove={(e) => handleDragMove(e.clientX)}
+      onMouseDown={handleDragStart}
+      onMouseMove={handleDragMove}
       onMouseUp={handleDragEnd}
       onMouseLeave={handleDragEnd}
     >
@@ -98,7 +97,7 @@ const Hero: React.FC = () => {
           <div
             key={index}
             className={`absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000 ease-in-out ${activeSlide === index ? 'opacity-100' : 'opacity-0'}`}
-            style={{ backgroundImage: `url('${slide.url}')` }}
+            style={{ backgroundImage: `url(${slide.url})` }}
             aria-label={slide.ariaLabel}
             aria-hidden={activeSlide !== index}
           >
@@ -129,7 +128,6 @@ const Hero: React.FC = () => {
       {/* Slideshow Controls */}
       {slides.length > 1 && (
         <>
-            {/* Left Arrow */}
             <button
                 onClick={prevSlide}
                 className="flex items-center justify-center absolute top-1/2 left-2 md:left-4 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 md:p-2.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-amber"
@@ -138,7 +136,6 @@ const Hero: React.FC = () => {
                 <ChevronLeftIcon className="h-5 w-5 md:h-6 md:w-6" />
             </button>
             
-            {/* Right Arrow */}
             <button
                 onClick={nextSlide}
                 className="flex items-center justify-center absolute top-1/2 right-2 md:right-4 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 md:p-2.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-amber"
@@ -147,7 +144,6 @@ const Hero: React.FC = () => {
                 <ChevronRightIcon className="h-5 w-5 md:h-6 md:w-6" />
             </button>
 
-            {/* Navigation Dots */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
                 {slides.map((_, index) => (
                     <button

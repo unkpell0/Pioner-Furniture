@@ -62,6 +62,8 @@ const CustomFurniture: React.FC = () => {
                   key={index}
                   src={img.src}
                   alt={img.alt}
+                  loading="lazy"
+                  decoding="async"
                   className="rounded-lg shadow-lg w-full h-full object-cover aspect-[4/3] transition-all duration-200 ease-out transform hover:scale-105 hover:shadow-xl"
                 />
               ))}

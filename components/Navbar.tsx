@@ -25,6 +25,18 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isOpen]);
+
+
   return (
     <nav 
       id="home" 
@@ -77,7 +89,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu */}
       <div 
-        className={`md:hidden overflow-hidden transition-all duration-200 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-brand-brown-dark ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
         id="mobile-menu"
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">

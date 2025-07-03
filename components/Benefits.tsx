@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { SparkleIcon } from './icons/SparkleIcon';
 import { LeafIcon } from './icons/LeafIcon';
 import { ShieldCheckIcon } from './icons/ShieldCheckIcon';
+import { LeafDecorationTopLeft, LeafDecorationBottomRight } from './decorations/LeafDecorations';
 
 const benefitsData = [
   {
@@ -30,10 +31,11 @@ const Benefits: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 bg-brand-cream">
-      <div className="container mx-auto px-6">
+    <section id="benefits" className="relative overflow-hidden py-16 sm:py-20 md:py-24 bg-brand-cream">
+      <LeafDecorationTopLeft className="absolute top-0 left-0 hidden md:block w-28 h-28 opacity-15 text-green-200" />
+      <div className="container mx-auto px-6 relative z-10">
         <h2 
-          className={`text-3xl md:text-4xl font-bold text-center text-brand-brown-dark mb-12 transition-all duration-200 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+          className={`text-3xl md:text-4xl font-bold text-center text-brand-brown-dark mb-12 transition-all duration-500 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
         >
           Mengapa Memilih PionerFurniture?
         </h2>
@@ -41,7 +43,8 @@ const Benefits: React.FC = () => {
           {benefitsData.map((benefit, index) => (
             <div 
               key={index} 
-              className={`group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 ease-out transform hover:-translate-y-1 hover:scale-105 ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+              className={`group bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-out transform hover:-translate-y-1 hover:scale-105 ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+              style={{ transitionDelay: `${isMounted ? index * 100 : 0}ms` }}
             >
               <div className="flex justify-center items-center">
                 {benefit.icon}
@@ -52,6 +55,7 @@ const Benefits: React.FC = () => {
           ))}
         </div>
       </div>
+      <LeafDecorationBottomRight className="absolute bottom-0 right-0 hidden md:block w-28 h-28 opacity-15 text-green-200" />
     </section>
   );
 };

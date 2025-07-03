@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { SwirlIcon } from './icons/SwirlIcon';
 import { GeometricIcon } from './icons/GeometricIcon';
@@ -63,6 +64,8 @@ const Craftsmanship: React.FC = () => {
             <img
               src={imageUrl}
               alt={altText}
+              loading="lazy"
+              decoding="async"
               className="rounded-xl shadow-xl w-full h-full object-cover aspect-[4/3]"
             />
           </div>

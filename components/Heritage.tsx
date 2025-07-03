@@ -3,6 +3,7 @@ import React from 'react';
 import { BalanceIcon } from './icons/BalanceIcon';
 import { MapPinIcon } from './icons/MapPinIcon';
 import { MuseumIcon } from './icons/MuseumIcon';
+import { LeafDecorationTopLeft, LeafDecorationBottomRight } from './decorations/LeafDecorations';
 
 const HeritagePoint: React.FC<{ icon: React.ReactNode; text: string; subtext?: string; }> = ({ icon, text, subtext }) => (
     <div 
@@ -21,8 +22,9 @@ const Heritage: React.FC = () => {
   const altText = "A beautifully detailed carved wooden door, representing cultural heritage";
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 bg-brand-cream overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section id="heritage" className="py-16 sm:py-20 md:py-24 bg-brand-cream overflow-hidden relative">
+      <LeafDecorationTopLeft className="hidden md:block absolute top-0 left-0 w-32 h-32 opacity-10 text-green-200 transform -translate-x-8 -translate-y-8" />
+      <div className="container mx-auto px-6 relative z-10">
         <h2 
           className="text-3xl md:text-4xl font-bold text-center text-brand-brown-dark mb-6"
         >
@@ -38,6 +40,8 @@ const Heritage: React.FC = () => {
             <img
               src={imageUrl}
               alt={altText}
+              loading="lazy"
+              decoding="async"
               className="rounded-xl shadow-xl w-full h-full object-cover aspect-square"
             />
           </div>
@@ -60,6 +64,7 @@ const Heritage: React.FC = () => {
           </div>
         </div>
       </div>
+      <LeafDecorationBottomRight className="hidden md:block absolute bottom-0 right-0 w-32 h-32 opacity-10 text-green-200 transform translate-x-8 translate-y-8" />
     </section>
   );
 };
