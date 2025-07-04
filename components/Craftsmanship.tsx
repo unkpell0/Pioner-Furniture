@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { SwirlIcon } from './icons/SwirlIcon';
 import { GeometricIcon } from './icons/GeometricIcon';
@@ -7,7 +6,7 @@ import { DetailLeafIcon } from './icons/DetailLeafIcon';
 
 const CraftsmanshipPoint: React.FC<{ icon: React.ReactNode; title: string; description: string; }> = ({ icon, title, description }) => (
     <div 
-        className="bg-amber-50 p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ease-out hover:scale-105 transform"
+        className="bg-amber-50 p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 ease-out hover:scale-105 transform text-left"
     >
         <div className="flex items-center mb-1.5">
             {icon}
@@ -19,14 +18,14 @@ const CraftsmanshipPoint: React.FC<{ icon: React.ReactNode; title: string; descr
 
 
 const Craftsmanship: React.FC = () => {
-  const imageUrl = "https://iili.io/Jb5yDXf.jpg";
-  const altText = "Close-up of a craftsman's hands skillfully carving intricate details into a piece of wood.";
+  const imageUrl = "https://iili.io/Fc7kF1t.jpg";
 
   return (
     <section id="craftsmanship" className="py-16 sm:py-20 md:py-24 bg-green-50 overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
-          <div className="lg:w-1/2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+          
+          <div className="w-full text-center md:text-left">
             <h2 
               className="text-3xl md:text-4xl font-bold text-brand-brown-dark mb-5 leading-tight"
             >
@@ -37,7 +36,7 @@ const Craftsmanship: React.FC = () => {
             >
               Setiap ukiran adalah maha karya yang lahir dari tangan-tangan terampil pengrajin Jepara, membawa detail dan keindahan yang tak lekang oleh waktu.
             </p>
-            <div className="space-y-3.5 mb-6">
+            <div className="space-y-3.5 mb-6 max-w-lg mx-auto md:mx-0">
                 <CraftsmanshipPoint 
                     icon={<SwirlIcon className="h-7 w-7 text-amber-600"/>}
                     title="Pola Spiral Ornamental"
@@ -55,20 +54,20 @@ const Craftsmanship: React.FC = () => {
                 />
             </div>
             <p 
-              className="text-lg font-medium text-brand-brown-dark italic"
+              className="mt-8 text-lg font-medium text-brand-brown-dark italic"
             >
               "Detail kecil dari kayu, menciptakan kenyamanan yang besar."
             </p>
           </div>
-          <div className="lg:w-1/2 w-full">
-            <img
-              src={imageUrl}
-              alt={altText}
-              loading="lazy"
-              decoding="async"
-              className="rounded-xl shadow-xl w-full h-full object-cover aspect-[4/3]"
+          
+          <div className="w-full">
+            <img 
+              src={imageUrl} 
+              alt="Beautifully crafted wooden desk and shelving unit in a modern room" 
+              className="rounded-2xl shadow-xl w-full h-auto object-cover aspect-[16/9] max-h-[300px] sm:max-h-[400px] md:max-h-[500px] transform hover:scale-105 transition-transform duration-300" 
             />
           </div>
+
         </div>
       </div>
     </section>
