@@ -6,6 +6,7 @@ import Craftsmanship from './components/Craftsmanship';
 import Heritage from './components/Heritage';
 import CustomFurniture from './components/CustomFurniture';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
 
 const App: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
         <CustomFurniture />
       </main>
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
