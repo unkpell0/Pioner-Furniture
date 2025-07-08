@@ -39,6 +39,21 @@
   }
 }
 </script>
+<style>
+  html {
+    /* Adjust this value to your sticky navbar's height, prevents section titles from being hidden */
+    scroll-padding-top: 64px; 
+  }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+  }
+</style>
 </head>
   <body class="bg-brand-cream text-brand-text font-sans overflow-x-hidden">
     <div id="root"></div>

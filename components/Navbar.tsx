@@ -8,12 +8,25 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { href: '#home', label: 'Home' },
     { href: '#benefits', label: 'Benefits' },
-    { href: '#craftsmanship', label: 'Craftsmanship' },
-    { href: '#heritage', label: 'Heritage' },
     { href: '#custom', label: 'Custom' },
+    { href: '#heritage', label: 'Heritage' },
+    { href: '#craftsmanship', label: 'Craftsmanship' },
+    { href: '#testimonials', label: 'Testimonials' },
+    { href: '#contact', label: 'Contact' },
   ];
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute('href');
+    if (!href) return;
+
+    const targetElement = document.querySelector(href);
+    if (targetElement) {
+      targetElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
     setIsOpen(false);
   };
 
@@ -39,18 +52,20 @@ const Navbar: React.FC = () => {
 
   return (
     <nav 
-      id="home" 
       className={`bg-brand-brown-dark sticky top-0 z-50 transition-shadow duration-200 ${isScrolled ? 'shadow-xl' : 'shadow-lg'}`}
     >
       <div className="container mx-auto px-4 sm:px-6 py-3">
         <div className="flex justify-between items-center">
-          <a href="#home" className="flex items-center text-white text-lg sm:text-xl md:text-2xl font-semibold hover:text-brand-amber transition-colors duration-200">
+          <a 
+            href="#home" 
+            onClick={handleLinkClick}
+            className="flex items-center text-white text-lg sm:text-xl md:text-2xl font-semibold hover:text-brand-amber transition-colors duration-200">
             <WoodIcon className="h-7 w-7 md:h-8 md:w-8 mr-2 text-brand-amber" />
             PionerFurniture
           </a>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-1">
+          <div className="hidden md:flex md:space-x-2 lg:space-x-4">
             {navLinks.map(link => (
               <a 
                 key={link.label} 

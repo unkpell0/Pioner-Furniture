@@ -1,206 +1,117 @@
 
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { PencilSquareIcon } from './icons/PencilSquareIcon';
-import { CheckBadgeIcon } from './icons/CheckBadgeIcon';
-import { UsersIcon } from './icons/UsersIcon';
-import { SofaIcon } from './icons/SofaIcon';
-import { TableIcon } from './icons/TableIcon';
-import { WardrobeIcon } from './icons/WardrobeIcon';
+import React, { useRef, useCallback } from 'react';
 import { ChevronLeftIcon } from './icons/ChevronLeftIcon';
 import { ChevronRightIcon } from './icons/ChevronRightIcon';
 
-
-interface FeatureItemProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-const FeatureItem: React.FC<FeatureItemProps> = ({ icon, title, description }) => (
-  <div className="flex items-start">
-    <div className="flex-shrink-0 text-brand-amber mt-1">{icon}</div>
-    <div className="ml-3.5">
-      <h4 className="text-base font-semibold text-brand-brown">{title}</h4>
-      <p className="text-brand-text text-sm md:text-base leading-snug">{description}</p>
-    </div>
-  </div>
-);
-
-const slides = [
-    { url: 'https://iili.io/Fc7k3BI.jpg', ariaLabel: 'Example of custom craft work' },
-    { url: 'https://iili.io/Fc7kCkG.jpg', ariaLabel: 'Showcasing a custom piece' },
-    { url: 'https://iili.io/Fc7kxI4.jpg', ariaLabel: 'Detailed custom design' },
-    { url: 'https://iili.io/Fc7kIQ2.jpg', ariaLabel: 'Personalized furniture project' },
-    { url: 'https://iili.io/Fc7kF1t.jpg', ariaLabel: 'Beautifully crafted wooden desk and shelving' },
+const portfolioItems = [
+    {
+        url: 'https://iili.io/Fc7k3BI.jpg',
+        title: 'Laci',
+        location: 'Tangerang Selatan',
+        ariaLabel: 'Proyek laci di Tangerang Selatan'
+    },
+    {
+        url: 'https://iili.io/Fc7kCkG.jpg',
+        title: 'Ruang Belajar',
+        location: 'Semarang - Jawa Tengah',
+        ariaLabel: 'Proyek ruang belajar di Semarang, Jawa Tengah'
+    },
+    {
+        url: 'https://iili.io/Fc7kxI4.jpg',
+        title: 'Meja dan Kursi',
+        location: 'Medan',
+        ariaLabel: 'Proyek meja dan kursi di Medan'
+    },
+    {
+        url: 'https://iili.io/F0MGiS2.jpg',
+        title: 'Ruang Santai',
+        location: 'Surabaya',
+        ariaLabel: 'Proyek ruang santai di Surabaya'
+    }
 ];
 
 const CustomFurniture: React.FC = () => {
-    const categories = [
-        { icon: <SofaIcon className="h-7 w-7 text-brand-brown mb-1"/>, label: "Sofa, Meja, Kursi" },
-        { icon: <WardrobeIcon className="h-7 w-7 text-brand-brown mb-1"/>, label: "Lemari, Kabinet" },
-        { icon: <TableIcon className="h-7 w-7 text-brand-brown mb-1"/>, label: "Desain Kustom", fullSpan: true },
-    ];
-    
-    const [activeSlide, setActiveSlide] = useState(0);
-    const sliderRef = useRef<HTMLDivElement>(null);
-    const trackRef = useRef<HTMLDivElement>(null);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-    const nextSlide = useCallback(() => {
-        setActiveSlide((prev) => (prev + 1) % slides.length);
+    const handleScroll = useCallback((direction: 'left' | 'right') => {
+        if (scrollContainerRef.current) {
+            const container = scrollContainerRef.current;
+            const firstItem = container.children[0] as HTMLElement;
+            if (firstItem) {
+                const itemWidth = firstItem.offsetWidth;
+                const style = window.getComputedStyle(container);
+                const gap = parseInt(style.gap) || 24; // Default to 24px for gap-6
+                const scrollAmount = itemWidth + gap;
+
+                container.scrollBy({
+                    left: direction === 'right' ? scrollAmount : -scrollAmount,
+                    behavior: 'smooth',
+                });
+            }
+        }
     }, []);
 
-    const prevSlide = useCallback(() => {
-        setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    }, []);
-
-    useEffect(() => {
-        const slideTimer = setInterval(nextSlide, 5000);
-        return () => clearInterval(slideTimer);
-    }, [nextSlide]);
-
-    useEffect(() => {
-        if (!sliderRef.current) return;
-
-        const calculateTransform = () => {
-            if (!sliderRef.current || !trackRef.current) return;
-
-            const slider = sliderRef.current;
-            const track = trackRef.current;
-            const slideElements = Array.from(track.children) as HTMLElement[];
-            const activeSlideElement = slideElements[activeSlide];
-
-            if (!activeSlideElement) return;
-
-            const sliderWidth = slider.offsetWidth;
-            const slideWidth = activeSlideElement.offsetWidth;
-            const slideOffsetLeft = activeSlideElement.offsetLeft;
-
-            const targetOffset = (sliderWidth / 2) - (slideOffsetLeft + slideWidth / 2);
-            
-            track.style.transform = `translateX(${targetOffset}px)`;
-        };
-
-        calculateTransform();
-
-        const resizeObserver = new ResizeObserver(calculateTransform);
-        resizeObserver.observe(sliderRef.current);
-
-        return () => {
-            resizeObserver.disconnect();
-        };
-
-    }, [activeSlide, slides.length]);
-
-
-  return (
-    <section id="custom" className="py-16 sm:py-20 md:py-24 bg-green-50 overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-brown-dark mb-4"
-          >
-            Wujudkan Furnitur Impian Anda!
-          </h2>
-          <p 
-            className="text-sm sm:text-base md:text-lg text-brand-text max-w-2xl mx-auto leading-relaxed"
-          >
-            Custom Furniture Eksklusif dari Jepara. Desain yang Anda bayangkan, kami wujudkan dalam kualitas terbaik.
-          </p>
-        </div>
-
-        <div className="flex flex-col items-center gap-10 md:gap-12">
-
-          {/* Image Carousel */}
-          <div className="relative w-full max-w-5xl group px-10 md:px-12">
-            <div ref={sliderRef} className="overflow-hidden cursor-grab active:cursor-grabbing -mx-10 md:-mx-12">
-                <div ref={trackRef} className="flex items-center transition-transform duration-500 ease-in-out">
-                    {slides.map((slide, index) => (
-                        <div
-                            key={index}
-                            className={`flex-shrink-0 w-full sm:w-5/6 md:w-2/3 lg:w-1/2 p-2.5 transition-all duration-300 ease-in-out transform ${
-                                activeSlide === index ? 'scale-100 opacity-100' : 'scale-90 opacity-60'
-                            }`}
-                             onClick={() => activeSlide !== index && setActiveSlide(index)}
-                        >
-                            <img
-                                src={slide.url}
-                                alt={slide.ariaLabel}
-                                className="w-full h-48 sm:h-60 md:h-72 lg:h-80 object-cover rounded-2xl shadow-xl pointer-events-none"
-                            />
-                        </div>
-                    ))}
+    return (
+        <section className="py-12 sm:py-16 bg-brand-brown-dark overflow-hidden">
+            <div className="container mx-auto px-4 sm:px-6">
+                <div className="text-center mb-10">
+                    <h2 id="custom" className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        Portofolio Proyek Kustom Kami
+                    </h2>
+                    <p className="text-base md:text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                        Lihat bagaimana kami mengubah visi klien menjadi kenyataan. Setiap proyek adalah cerminan dari keahlian, kualitas, dan sentuhan personal.
+                    </p>
                 </div>
-            </div>
-
-             {/* Slideshow Controls */}
-            {slides.length > 1 && (
-                <>
-                    <button
-                        onClick={prevSlide}
-                        className="flex items-center justify-center absolute top-1/2 left-1 md:left-2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 md:p-2.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-amber"
-                        aria-label="Previous image"
+                
+                <div className="relative">
+                    <div
+                        ref={scrollContainerRef}
+                        className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth gap-6 py-4 no-scrollbar"
+                        role="list"
                     >
-                        <ChevronLeftIcon className="h-5 w-5 md:h-6 md:w-6" />
+                        {portfolioItems.map((item, index) => (
+                            <div
+                                key={index}
+                                className="snap-start flex-shrink-0 w-[85%] sm:w-[calc(50%-0.75rem)] lg:w-[calc((100%-3rem)/3)]"
+                                role="listitem"
+                            >
+                                <div className="relative rounded-2xl overflow-hidden shadow-xl h-full transition-transform duration-300 ease-in-out hover:scale-105">
+                                    <img
+                                        src={item.url}
+                                        alt={item.ariaLabel}
+                                        className="w-full h-64 sm:h-72 object-cover"
+                                        loading="lazy"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent pointer-events-none"></div>
+                                    <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                                        <h4 className="font-bold text-lg drop-shadow-md">{item.title}</h4>
+                                        <p className="text-sm text-gray-200 drop-shadow">{item.location}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Navigation Buttons */}
+                    <button
+                        onClick={() => handleScroll('left')}
+                        className="hidden sm:flex items-center justify-center absolute top-1/2 left-2 -translate-y-1/2 z-10 bg-white/60 sm:bg-white/80 hover:bg-white text-brand-brown-dark rounded-full p-2 sm:p-2.5 shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-amber"
+                        aria-label="Previous project"
+                    >
+                        <ChevronLeftIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </button>
                     
                     <button
-                        onClick={nextSlide}
-                        className="flex items-center justify-center absolute top-1/2 right-1 md:right-2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 md:p-2.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-amber"
-                        aria-label="Next image"
+                        onClick={() => handleScroll('right')}
+                        className="hidden sm:flex items-center justify-center absolute top-1/2 right-2 -translate-y-1/2 z-10 bg-white/60 sm:bg-white/80 hover:bg-white text-brand-brown-dark rounded-full p-2 sm:p-2.5 shadow-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-brand-amber"
+                        aria-label="Next project"
                     >
-                        <ChevronRightIcon className="h-5 w-5 md:h-6 md:w-6" />
+                        <ChevronRightIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </button>
-                </>
-            )}
-          </div>
-          
-          <div className="w-full max-w-3xl">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center">
-                {categories.map((cat, index) => (
-                    <div 
-                        key={index} 
-                        className={`flex flex-col items-center justify-center p-2.5 bg-white rounded-lg shadow-md transition-all duration-200 ease-out transform hover:scale-110 hover:shadow-lg ${cat.fullSpan ? 'col-span-2 sm:col-span-1' : ''}`}
-                    >
-                        {cat.icon}
-                        <span className="text-xs text-brand-text mt-1">{cat.label}</span>
-                    </div>
-                ))}
+                </div>
             </div>
-          </div>
-
-          <div className="w-full max-w-3xl bg-amber-50 p-6 sm:p-8 rounded-xl shadow-lg">
-            <div className="space-y-6 md:space-y-7">
-              <FeatureItem
-                icon={<PencilSquareIcon className="h-8 w-8" />}
-                title="Desain Sesuai Keinginan"
-                description="Bebas menentukan bentuk, ukuran, dan detail sesuai imajinasi Anda."
-              />
-              <FeatureItem
-                icon={<CheckBadgeIcon className="h-8 w-8" />}
-                title="Kualitas Kayu Pilihan"
-                description="Pilihan kayu jati, mahoni, atau jenis lain sesuai pesanan untuk hasil terbaik."
-              />
-              <FeatureItem
-                icon={<UsersIcon className="h-8 w-8" />}
-                title="Pengrajin Jepara Berpengalaman"
-                description="Keahlian seni ukir turun-temurun memastikan setiap detail dikerjakan dengan sempurna."
-              />
-            </div>
-            <div 
-                className="mt-8 md:mt-10 text-center"
-            >
-              <a
-                href="mailto:info@pionerfurniture.com?subject=Inquiry%20Custom%20Furniture"
-                className="bg-brand-brown hover:bg-brand-brown-dark text-white font-semibold py-3 px-6 md:py-3 md:px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 text-base md:text-lg"
-              >
-                Hubungi Kami Untuk Info Lebih Lanjut!
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+        </section>
+    );
 };
 
 export default CustomFurniture;

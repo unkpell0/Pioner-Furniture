@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { BalanceIcon } from './icons/BalanceIcon';
 import { MapPinIcon } from './icons/MapPinIcon';
@@ -21,18 +22,19 @@ const Heritage: React.FC = () => {
     const imageUrl = "https://iili.io/Fc7kKrX.jpg";
     
   return (
-    <section id="heritage" className="py-16 sm:py-20 md:py-24 bg-brand-cream overflow-hidden relative">
+    <section className="py-12 sm:py-16 bg-amber-50 overflow-hidden relative">
       <LeafDecorationTopLeft className="hidden md:block absolute top-0 left-0 w-32 h-32 opacity-10 text-green-200 transform -translate-x-8 -translate-y-8" />
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center max-w-5xl mx-auto">
             <div className="w-full text-center md:text-left md:order-2">
                 <h2 
-                className="text-3xl md:text-4xl font-bold text-brand-brown-dark mb-6"
+                id="heritage"
+                className="text-3xl md:text-4xl font-bold text-brand-brown-dark mb-5"
                 >
                 Warisan Seni Nusantara dalam Setiap Ukiran
                 </h2>
                 <p 
-                className="text-base md:text-lg text-brand-text mb-10 leading-relaxed"
+                className="text-base md:text-lg text-brand-text mb-8 leading-relaxed"
                 >
                 Setiap guratan kayu menyimpan cerita dan identitas budaya, sebuah warisan yang kami jaga dan lestarikan dalam setiap produk PionerFurniture.
                 </p>
@@ -58,7 +60,7 @@ const Heritage: React.FC = () => {
                 <img 
                     src={imageUrl} 
                     alt="Elegant living room with custom wooden furniture" 
-                    className="rounded-2xl shadow-xl w-full h-auto object-cover aspect-[16/9] max-h-[300px] sm:max-h-[400px] md:max-h-[500px] transform hover:scale-105 transition-transform duration-300"
+                    className="rounded-2xl shadow-xl w-full h-auto object-cover max-h-[350px] md:max-h-[550px] transform hover:scale-105 transition-transform duration-300"
                 />
             </div>
         </div>

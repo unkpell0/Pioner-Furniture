@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeftIcon } from './icons/ChevronLeftIcon';
 import { ChevronRightIcon } from './icons/ChevronRightIcon';
@@ -82,6 +83,7 @@ const Hero: React.FC = () => {
 
   return (
     <section 
+      id="home"
       className={`relative h-[50vh] sm:h-[60vh] md:h-[75vh] text-white overflow-hidden select-none cursor-grab ${isDragging ? 'cursor-grabbing' : 'active:cursor-grabbing'}`}
       aria-label="Hero section with a slideshow of Jepara wood carvings"
       onTouchStart={handleDragStart}
@@ -108,12 +110,12 @@ const Hero: React.FC = () => {
       {/* Content */}
       <div className="container mx-auto px-6 h-full flex flex-col justify-center items-center text-center relative z-10 pointer-events-none">
         <h1 
-          className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight transition-all duration-700 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+          className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight transition-all duration-700 ease-out ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} [text-shadow:0_2px_4px_rgba(0,0,0,0.5)] max-w-5xl`}
         >
           <span className="text-brand-amber">PionerFurniture:</span> Keindahan Alami Furnitur Kayu
         </h1>
         <p 
-          className={`text-base sm:text-lg mb-8 max-w-2xl lg:max-w-3xl mx-auto transition-all duration-700 ease-out delay-200 ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+          className={`text-base sm:text-lg mb-8 max-w-2xl lg:max-w-3xl mx-auto transition-all duration-700 ease-out delay-200 ${isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'} [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]`}
         >
           Rumah bukan hanya tempat tinggal, tapi tempat hati berlabuh. Furnitur kami membawa kehangatan dan seni dalam setiap detail.
         </p>
