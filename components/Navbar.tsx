@@ -20,13 +20,22 @@ const Navbar: React.FC = () => {
     const href = e.currentTarget.getAttribute('href');
     if (!href) return;
 
-    const targetElement = document.querySelector(href);
+    const targetElement = document.querySelector(href) as HTMLElement;
+    const headerElement = document.querySelector('nav');
+    
     if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+        // Fallback ke 0 jika header tidak ditemukan, meskipun seharusnya selalu ada.
+        const headerHeight = headerElement ? headerElement.offsetHeight : 0;
+        
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerHeight;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
     }
+    
     setIsOpen(false);
   };
 
